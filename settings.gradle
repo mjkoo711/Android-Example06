@@ -1,1 +1,1 @@
-include ':app', ':QuickCoding01', ':QuickCoding02'
+include ':app', ':QuickCoding01', ':QuickCoding02', ':QuickCoding04', ':QuickCoding04'
