@@ -1,23 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:id="@+id/activity_main"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    tools:context="my.kmucs.com.myapplication.MainActivity"
-    android:orientation="vertical">
-
-    <TextView
-        android:id="@+id/Latitude"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text=""/>
-    <TextView
-        android:id="@+id/Longitude"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text=""/>
+    tools:context="my.kmucs.com.myapplication.MainActivity">
 
     <Button
-        android:id="@+id/btn_start"
+        android:id="@+id/btn01"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-</LinearLayout>
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="위치 확인 시작"/>
+
+
+
+
+</RelativeLayout>
