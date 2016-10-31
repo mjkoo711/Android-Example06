@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.database.sqlite.SQLiteDatabase;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -13,13 +14,29 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /*
 * 위치 관리자를 이용해 내 위치를 확인하는 방법
  */
 
 public class MainActivity extends Activity {
+    private String dbName = "QuickCoding04.db"; //db명
+    private int dbVersion = 1; //db 버젼
+    private SQLiteDatabase db;
+
+    Double latitude;
+    Double longitude;
+
+    TextView txt01, txt02, datetxt;
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +45,12 @@ public class MainActivity extends Activity {
         //버튼 이벤트 처리
 
         Button btn01 = (Button)findViewById(R.id.btn01);
+        txt01 = (TextView)findViewById(R.id.txt01);
+        txt02 = (TextView)findViewById(R.id.txt02);
+        datetxt = (TextView)findViewById(R.id.datetxt);
+
+
+
         btn01.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -85,8 +108,8 @@ public class MainActivity extends Activity {
 
         //위치 정보를 받을 리스너 생성
         GPSListener gpsListener = new GPSListener();
-        long minTime = 10000;
-        float minDistance = 0;
+        long minTime = 10000; //1000 = 1초, 1분
+        float minDistance = 10; //10미터
 
         try{
             //gps를 이용한 위치 요청
@@ -99,6 +122,15 @@ public class MainActivity extends Activity {
                 Double latitude = lastLocation.getLatitude();
                 Double longitude = lastLocation.getLongitude();
 
+                long now = System.currentTimeMillis();
+                Date date = new Date(now);
+                SimpleDateFormat sdfNow = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                String strNow = sdfNow.format(date);
+
+                datetxt.setText("마지막으로 최적화된 날짜 : " + strNow);
+                
+                txt01.setText("위도 : " + latitude);
+                txt02.setText("경도 : " + longitude);
                 Toast.makeText(getApplicationContext(), "Last Known Location : " + "Latitude : " + latitude + "\nLongitude:" + longitude, Toast.LENGTH_LONG).show();
             }
         }catch (SecurityException ex){
@@ -111,11 +143,22 @@ public class MainActivity extends Activity {
         //위치 정보가 확인될때 자동 호출되는 메소드
         @Override
         public void onLocationChanged(Location location) {
-            Double latitude = location.getLatitude();
-            Double longitude = location.getLongitude();
+            latitude = location.getLatitude();
+            longitude = location.getLongitude();
+
+            long now = System.currentTimeMillis();
+            Date date = new Date(now);
+            SimpleDateFormat sdfNow = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            String strNow = sdfNow.format(date);
+
+            datetxt.setText("마지막으로 최적화된 날짜 : " + strNow);
+
+            txt01.setText("위도 : " + latitude);
+            txt02.setText("경도 : " + longitude);
+
 
             String msg = "Latitude : " + latitude + "\nLongitude : " + longitude;
-            Log.i("GPSListner", msg);
+            Log.i("GPSListener", msg);
 
             Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
 
