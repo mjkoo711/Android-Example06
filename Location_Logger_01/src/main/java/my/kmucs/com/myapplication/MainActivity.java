@@ -128,7 +128,7 @@ public class MainActivity extends Activity {
                 String strNow = sdfNow.format(date);
 
                 datetxt.setText("마지막으로 최적화된 날짜 : " + strNow);
-                
+
                 txt01.setText("위도 : " + latitude);
                 txt02.setText("경도 : " + longitude);
                 Toast.makeText(getApplicationContext(), "Last Known Location : " + "Latitude : " + latitude + "\nLongitude:" + longitude, Toast.LENGTH_LONG).show();
