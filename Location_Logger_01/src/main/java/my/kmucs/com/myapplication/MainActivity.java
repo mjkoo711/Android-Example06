@@ -33,6 +33,7 @@ public class MainActivity extends Activity {
     Double longitude;
 
     TextView txt01, txt02, datetxt;
+    Button save_btn, move_btn, reset_btn;
 
 
 
@@ -44,14 +45,16 @@ public class MainActivity extends Activity {
 
         //버튼 이벤트 처리
 
-        Button btn01 = (Button)findViewById(R.id.btn01);
+        save_btn = (Button)findViewById(R.id.btn01);
+        move_btn = (Button)findViewById(R.id.btn02);
+        reset_btn = (Button)findViewById(R.id.btn03);
         txt01 = (TextView)findViewById(R.id.txt01);
         txt02 = (TextView)findViewById(R.id.txt02);
         datetxt = (TextView)findViewById(R.id.datetxt);
 
+        checkDangerousPermissions();
 
-
-        btn01.setOnClickListener(new View.OnClickListener(){
+        save_btn.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
@@ -60,7 +63,7 @@ public class MainActivity extends Activity {
             }
         });
 
-        checkDangerousPermissions();
+
 
     }
     private void checkDangerousPermissions(){
@@ -112,10 +115,10 @@ public class MainActivity extends Activity {
         float minDistance = 10; //10미터
 
         try{
-            //gps를 이용한 위치 요청
-            manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, minTime, minDistance,gpsListener);
-            //네트워크를 이용한 위치 요청
-            manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, minTime, minDistance, gpsListener);
+            //gps를 이용한 위치 요청(주기적으로)
+            //manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, minTime, minDistance,gpsListener);
+            //네트워크를 이용한 위치 요청(주기적으로)
+            //manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, minTime, minDistance, gpsListener);
             //위치 확인이 안되는 경우에도 최근에 확인된 위치 정보 먼저 확인
             Location lastLocation = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             if(lastLocation != null){
