@@ -1,1 +1,1 @@
-include ':app', ':QuickCoding01', ':QuickCoding02', ':Location_Logger_01', ':QuickCoding05'
+include ':app', ':QuickCoding01', ':QuickCoding02', ':Location_Logger_01', ':QuickCoding05', ':Locatioin_Logger_02', ':Location_Logger_02'
