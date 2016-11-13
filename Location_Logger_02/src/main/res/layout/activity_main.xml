@@ -13,7 +13,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="발생한 일"
+            android:text="한줄 쓰기 : "
+            android:textStyle="bold"
             android:textSize="20dp"/>
 
         <EditText

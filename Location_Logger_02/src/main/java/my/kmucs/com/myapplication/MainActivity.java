@@ -191,15 +191,15 @@ public class MainActivity extends Activity {
         LocationManager manager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 
         //위치 정보를 받을 리스너 생성
-        //GPSListener gpsListener = new GPSListener();
-        //long minTime = 10000; //1000 = 1초, 1분
-        //float minDistance = 10; //10미터
+        GPSListener gpsListener = new GPSListener();
+        long minTime = 10000; //1000 = 1초
+        float minDistance = 10; //10미터
 
         try{
             //gps를 이용한 위치 요청(주기적으로)
-            //manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, minTime, minDistance,gpsListener);
+            manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, minTime, minDistance,gpsListener);
             //네트워크를 이용한 위치 요청(주기적으로)
-            //manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, minTime, minDistance, gpsListener);
+            manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, minTime, minDistance, gpsListener);
             //위치 확인이 안되는 경우에도 최근에 확인된 위치 정보 먼저 확인
             Location lastLocation = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             if(lastLocation != null){
@@ -229,7 +229,7 @@ public class MainActivity extends Activity {
 
                 sqlite.execSQL(sql);
                 sqlite.close();
-                Toast.makeText(getApplicationContext(), "데이터가 저장되었습니다." , Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "데이터가 저장되었습니다.", Toast.LENGTH_SHORT).show();
             }
         }catch (SecurityException ex){
             ex.printStackTrace();
@@ -242,10 +242,10 @@ public class MainActivity extends Activity {
             latitude = location.getLatitude();
             longitude = location.getLongitude();
 
-            String msg = "위도 : " + latitude + "\n경도 : " + longitude;
+            String msg = "\n위도 : " + latitude + "\n경도 : " + longitude;
             Log.i("GPSListener", msg);
 
-            Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "위치정보가 업데이트되었습니다. " + msg, Toast.LENGTH_SHORT).show();
 
 
         }
