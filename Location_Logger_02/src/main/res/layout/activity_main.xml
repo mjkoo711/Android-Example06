@@ -26,6 +26,45 @@
 
 
     </LinearLayout>
+
+    <RadioGroup
+        android:id="@+id/radiogroup"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/rbtn01"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="공부"/>
+
+        <RadioButton
+            android:id="@+id/rbtn02"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="여가활동"/>
+
+        <RadioButton
+            android:id="@+id/rbtn03"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="식사"/>
+
+        <RadioButton
+            android:id="@+id/rbtn04"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="기타"/>
+
+    </RadioGroup>
+
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

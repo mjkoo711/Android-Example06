@@ -17,6 +17,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,13 +37,18 @@ public class MainActivity extends Activity {
 
     TextView latitude_txt, longitude_txt, date_txt, work_txt;
     Button save_btn, print_btn, move_btn, reset_btn;
+    RadioGroup radioG01;
+    RadioButton radio01, radio02, radio03, radio04;
     EditText work_et;
     Intent i1;
 
     MyDB mydb;
     SQLiteDatabase sqlite;
 
-
+    //위치 정보를 받을 리스너 생성
+    GPSListener gpsListener = new GPSListener();
+    long minTime = 10000; //1000 = 1초
+    float minDistance = 10; //10미터
 
 
 
@@ -62,11 +69,20 @@ public class MainActivity extends Activity {
         date_txt = (TextView)findViewById(R.id.date);
         work_et =(EditText)findViewById(R.id.ed_work);
         work_txt = (TextView)findViewById(R.id.work);
+        radioG01 = (RadioGroup)findViewById(R.id.radiogroup);
+        radio01 = (RadioButton)findViewById(R.id.rbtn01);
+        radio02 = (RadioButton)findViewById(R.id.rbtn02);
+        radio03 = (RadioButton)findViewById(R.id.rbtn03);
+        radio04 = (RadioButton)findViewById(R.id.rbtn04);
+
         //인텐트 생성
         i1 = new Intent(getApplicationContext(), MapsActivity.class);
 
         //데이터베이스 연결
         mydb = new MyDB(this);
+
+        //
+
 
 
 
@@ -190,10 +206,7 @@ public class MainActivity extends Activity {
         //위치 관리자 객체 참조
         LocationManager manager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 
-        //위치 정보를 받을 리스너 생성
-        GPSListener gpsListener = new GPSListener();
-        long minTime = 10000; //1000 = 1초
-        float minDistance = 10; //10미터
+
 
         try{
             //gps를 이용한 위치 요청(주기적으로)
