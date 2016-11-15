@@ -17,7 +17,7 @@ public class MyDB extends SQLiteOpenHelper {
     @Override//최초실행시
     public void onCreate(SQLiteDatabase db) {
         //최초 DB 만들때만 실행
-        String sql = "CREATE TABLE location(_id INTEGER PRIMARY KEY AUTOINCREMENT,date CHAR[30], latitude REAL, longitude REAL, work CHAR(50))";
+        String sql = "CREATE TABLE location(_id INTEGER PRIMARY KEY AUTOINCREMENT,date CHAR[30], latitude REAL, longitude REAL, work CHAR(50), etc INTEGER)";
         //sql실행
         db.execSQL(sql);
     }

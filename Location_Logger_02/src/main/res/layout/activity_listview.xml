@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="정보 리스트 뷰"
+        android:textSize="30dp"
+        android:background="#fa8899"
+        android:gravity="center"
+        android:alpha="0.6"
+        />
+
+    <Button
+        android:id="@+id/list_close_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:text="종료"
+        android:textSize="20dp"/>
+
+    <ListView
+        android:id="@+id/list01"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    </ListView>
+
+</LinearLayout>

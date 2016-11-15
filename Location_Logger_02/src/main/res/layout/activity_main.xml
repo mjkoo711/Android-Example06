@@ -38,6 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textColor="#ff0000"
             android:text="공부"/>
 
         <RadioButton
@@ -45,13 +46,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="여가활동"/>
+            android:textColor="#ff9900"
+            android:text="근로"/>
 
         <RadioButton
             android:id="@+id/rbtn03"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textColor="#04ff00"
             android:text="식사"/>
 
         <RadioButton
@@ -59,7 +62,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="기타"/>
+            android:textColor="#007bff"
+            android:text="휴식"/>
+
+        <RadioButton
+            android:id="@+id/rbtn05"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="#ff00ff"
+            android:text="이동"/>
 
     </RadioGroup>
 

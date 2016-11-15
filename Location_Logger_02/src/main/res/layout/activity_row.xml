@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearRow"
+    android:background="#dfdfdf"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/row_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="날짜/시간"
+        android:padding="5dp"/>
+
+    <TextView
+        android:id="@+id/row_latitude"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="위도"
+        android:padding="5dp"/>
+
+    <TextView
+        android:id="@+id/row_longitude"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="경도"
+        android:padding="5dp"/>
+
+    <TextView
+        android:id="@+id/row_work"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="일어난 일"
+        android:padding="5dp"/>
+
+</LinearLayout>

@@ -38,17 +38,19 @@ public class MainActivity extends Activity {
     TextView latitude_txt, longitude_txt, date_txt, work_txt;
     Button save_btn, print_btn, move_btn, reset_btn;
     RadioGroup radioG01;
-    RadioButton radio01, radio02, radio03, radio04;
+    RadioButton radio01, radio02, radio03, radio04, radio05;
     EditText work_et;
-    Intent i1;
+    Intent i1, i2;
 
     MyDB mydb;
     SQLiteDatabase sqlite;
 
     //위치 정보를 받을 리스너 생성
     GPSListener gpsListener = new GPSListener();
-    long minTime = 10000; //1000 = 1초
-    float minDistance = 10; //10미터
+    long minTime = 5000; //1000 = 1초
+    float minDistance = 1; //1미터
+
+    int etcStr;
 
 
 
@@ -74,9 +76,12 @@ public class MainActivity extends Activity {
         radio02 = (RadioButton)findViewById(R.id.rbtn02);
         radio03 = (RadioButton)findViewById(R.id.rbtn03);
         radio04 = (RadioButton)findViewById(R.id.rbtn04);
+        radio05 = (RadioButton)findViewById(R.id.rbtn05);
+
 
         //인텐트 생성
         i1 = new Intent(getApplicationContext(), MapsActivity.class);
+        i2 = new Intent(getApplicationContext(), ListViewActivity.class);
 
         //데이터베이스 연결
         mydb = new MyDB(this);
@@ -103,6 +108,14 @@ public class MainActivity extends Activity {
             }
         });
 
+        print_btn.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                printListInformation();
+                return false;
+            }
+        });
+
         move_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -122,6 +135,31 @@ public class MainActivity extends Activity {
                 mydb.onUpgrade(sqlite, 1, 2);
                 sqlite.close();
 
+            }
+        });
+
+
+
+        radioG01.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch(checkedId){
+                    case R.id.rbtn01:
+                        etcStr = 1;
+                        break;
+                    case R.id.rbtn02:
+                        etcStr = 2;
+                        break;
+                    case R.id.rbtn03:
+                        etcStr = 3;
+                        break;
+                    case R.id.rbtn04:
+                        etcStr = 4;
+                        break;
+                    case R.id.rbtn05:
+                        etcStr = 5;
+                        break;
+                }
             }
         });
 
@@ -167,6 +205,11 @@ public class MainActivity extends Activity {
             }
         }
     }
+
+    private void printListInformation(){
+        startActivity(i2);
+    }
+
     //정보를 출력하는 함수
     private void printInformation(){
         //데이터베이스 열고
@@ -205,9 +248,6 @@ public class MainActivity extends Activity {
     private void saveInformation(){
         //위치 관리자 객체 참조
         LocationManager manager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-
-
-
         try{
             //gps를 이용한 위치 요청(주기적으로)
             manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, minTime, minDistance,gpsListener);
@@ -225,12 +265,6 @@ public class MainActivity extends Activity {
                 SimpleDateFormat sdfNow = new SimpleDateFormat("yyyy/MM/dd" + "\nHH:mm:ss");
                 String strNow = sdfNow.format(date);
 
-//                date_txt.setText("날짜/시간\n" + strNow);
-//                latitude_txt.setText("위도\n" + form.format(latitude));
-//                longitude_txt.setText("경도\n" + form.format(longitude));
-//                work_txt.setText("일어난 일\n" + temp_workStr);
-                //db에 저장
-
                 sqlite = mydb.getWritableDatabase(); //읽고쓰기가능한속성
 
                 String dateStr = strNow;
@@ -238,11 +272,11 @@ public class MainActivity extends Activity {
                 String longitudeStr = longitude.toString();
                 String workStr = work_et.getText().toString();
 
-                String sql = "INSERT INTO location(date, latitude, longitude, work) VALUES('" + dateStr + "','" +latitudeStr+"', '" +longitudeStr+"', '" +workStr+"')";
+                String sql = "INSERT INTO location(date, latitude, longitude, work, etc) VALUES('" + dateStr + "','" +latitudeStr+"', '" +longitudeStr+"', '" +workStr+"', '"+etcStr+"')";
 
                 sqlite.execSQL(sql);
                 sqlite.close();
-                Toast.makeText(getApplicationContext(), "데이터가 저장되었습니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "데이터가 저장되었습니다." + etcStr, Toast.LENGTH_SHORT).show();
             }
         }catch (SecurityException ex){
             ex.printStackTrace();
@@ -258,7 +292,7 @@ public class MainActivity extends Activity {
             String msg = "\n위도 : " + latitude + "\n경도 : " + longitude;
             Log.i("GPSListener", msg);
 
-            Toast.makeText(getApplicationContext(), "위치정보가 업데이트되었습니다. " + msg, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "위치정보가 업데이트되었습니다. ", Toast.LENGTH_SHORT).show();
 
 
         }
