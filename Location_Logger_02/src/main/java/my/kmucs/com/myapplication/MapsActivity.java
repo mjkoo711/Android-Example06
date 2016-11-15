@@ -62,7 +62,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         while(cursor.moveToNext()){
             LatLng temp = new LatLng(Double.parseDouble(cursor.getString(2)), Double.parseDouble(cursor.getString(3)));
             mMap.addMarker((markerOptions.position(temp).title(cursor.getString(4))));
-            mMap.setMinZoomPreference(17);
+            mMap.setMinZoomPreference(13);
             mMap.moveCamera(CameraUpdateFactory.newLatLng(temp));
 
             //선연결하는 문장

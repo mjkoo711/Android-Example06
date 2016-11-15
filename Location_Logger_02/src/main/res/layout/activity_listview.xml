@@ -8,10 +8,51 @@
         android:layout_height="wrap_content"
         android:text="정보 리스트 뷰"
         android:textSize="30dp"
-        android:background="#fa8899"
         android:gravity="center"
         android:alpha="0.6"
         />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/listbtn01"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/color01"
+            android:text="공부"/>
+        <Button
+            android:id="@+id/listbtn02"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/color02"
+            android:text="근로"/>
+        <Button
+            android:id="@+id/listbtn03"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/color03"
+            android:text="식사"/>
+        <Button
+            android:id="@+id/listbtn04"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/color04"
+            android:text="휴식"/>
+        <Button
+            android:id="@+id/listbtn05"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color05"
+            android:layout_weight="1"
+            android:text="이동"/>
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/list_close_btn"

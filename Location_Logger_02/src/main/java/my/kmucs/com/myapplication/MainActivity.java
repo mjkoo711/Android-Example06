@@ -49,11 +49,7 @@ public class MainActivity extends Activity {
     GPSListener gpsListener = new GPSListener();
     long minTime = 5000; //1000 = 1초
     float minDistance = 1; //1미터
-
-    int etcStr;
-
-
-
+    int etcStr; //분류를 위한 변수
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,13 +82,8 @@ public class MainActivity extends Activity {
         //데이터베이스 연결
         mydb = new MyDB(this);
 
-        //
-
-
-
-
         checkDangerousPermissions();
-
+        //저장버튼
         save_btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -101,13 +92,14 @@ public class MainActivity extends Activity {
             }
         });
 
+        //조회 숏클릭
         print_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 printInformation();
             }
         });
-
+        //조회 롱클릭
         print_btn.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -115,13 +107,14 @@ public class MainActivity extends Activity {
                 return false;
             }
         });
-
+        //맵이동버튼
         move_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(i1);
             }
         });
+        //초기화버튼
         reset_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -139,7 +132,7 @@ public class MainActivity extends Activity {
         });
 
 
-
+        //radio 그룹, 분야별로 리스트를 보기위해 생성
         radioG01.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {

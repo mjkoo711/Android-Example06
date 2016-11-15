@@ -12,8 +12,8 @@ import android.widget.ListView;
  * Created by Koo on 2016-11-14.
  */
 
-public class ListViewActivity extends Activity {
-    Button closeBtn;
+public class ListViewActivity extends Activity implements View.OnClickListener {
+    Button closeBtn, listbtn01, listbtn02, listbtn03, listbtn04, listbtn05;
     ListView infoList;
     MyDB mydb;
     SQLiteDatabase sqlite;
@@ -27,6 +27,11 @@ public class ListViewActivity extends Activity {
 
         closeBtn = (Button)findViewById(R.id.list_close_btn);
         infoList = (ListView)findViewById(R.id.list01);
+        listbtn01 = (Button)findViewById(R.id.listbtn01);
+        listbtn02 = (Button)findViewById(R.id.listbtn02);
+        listbtn03 = (Button)findViewById(R.id.listbtn03);
+        listbtn04 = (Button)findViewById(R.id.listbtn04);
+        listbtn05 = (Button)findViewById(R.id.listbtn05);
 
         //데이터베이스 연결
         mydb = new MyDB(this);
@@ -40,7 +45,76 @@ public class ListViewActivity extends Activity {
                 finish();
             }
         });
+
+        listbtn01.setOnClickListener(this);
+        listbtn02.setOnClickListener(this);
+        listbtn03.setOnClickListener(this);
+        listbtn04.setOnClickListener(this);
+        listbtn05.setOnClickListener(this);
    }
+
+    public void onClick(View v){
+        String sql;
+        switch (v.getId()){
+            case R.id.listbtn01:
+                sqlite = mydb.getReadableDatabase();
+                sql = "SELECT * FROM location WHERE etc=1";
+                cursor = sqlite.rawQuery(sql, null);
+
+                if(cursor.getCount() > 0){
+                    startManagingCursor(cursor);
+                    InfoAdapter = new InformationAdapter(this, cursor);
+                    infoList.setAdapter(InfoAdapter);
+                }
+                break;
+            case R.id.listbtn02:
+                sqlite = mydb.getReadableDatabase();
+                sql = "SELECT * FROM location WHERE etc=2";
+                cursor = sqlite.rawQuery(sql, null);
+
+                if(cursor.getCount() > 0){
+                    startManagingCursor(cursor);
+                    InfoAdapter = new InformationAdapter(this, cursor);
+                    infoList.setAdapter(InfoAdapter);
+                }
+                break;
+            case R.id.listbtn03:
+                sqlite = mydb.getReadableDatabase();
+                sql = "SELECT * FROM location WHERE etc=3";
+                cursor = sqlite.rawQuery(sql, null);
+
+                if(cursor.getCount() > 0){
+                    startManagingCursor(cursor);
+                    InfoAdapter = new InformationAdapter(this, cursor);
+                    infoList.setAdapter(InfoAdapter);
+                }
+                break;
+            case R.id.listbtn04:
+                sqlite = mydb.getReadableDatabase();
+                sql = "SELECT * FROM location WHERE etc=4";
+                cursor = sqlite.rawQuery(sql, null);
+
+                if(cursor.getCount() > 0){
+                    startManagingCursor(cursor);
+                    InfoAdapter = new InformationAdapter(this, cursor);
+                    infoList.setAdapter(InfoAdapter);
+                }
+                break;
+            case R.id.listbtn05:
+                sqlite = mydb.getReadableDatabase();
+                sql = "SELECT * FROM location WHERE etc=5";
+                cursor = sqlite.rawQuery(sql, null);
+
+                if(cursor.getCount() > 0){
+                    startManagingCursor(cursor);
+                    InfoAdapter = new InformationAdapter(this, cursor);
+                    infoList.setAdapter(InfoAdapter);
+                }
+                break;
+        }
+    }
+
+
 
     //커서가 어디까지 가서 끝낼건지 이런 동작은 startManagingCursor를 써서 자동으로 알아서하게해라,
     public void getInfoForCursorAdapter(){
