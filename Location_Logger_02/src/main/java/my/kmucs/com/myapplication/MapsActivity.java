@@ -61,6 +61,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         while(cursor.moveToNext()){
             LatLng temp = new LatLng(Double.parseDouble(cursor.getString(2)), Double.parseDouble(cursor.getString(3)));
+            switch (cursor.getString(5)){
+                case "1":
+                    markerOptions.snippet("공부");
+                    break;
+                case "2":
+                    markerOptions.snippet("근로");
+                    break;
+                case "3":
+                    markerOptions.snippet("식사");
+                    break;
+                case "4":
+                    markerOptions.snippet("휴식");
+                    break;
+                case "5":
+                    markerOptions.snippet("이동");
+                    break;
+            }
             mMap.addMarker((markerOptions.position(temp).title(cursor.getString(4))));
             mMap.setMinZoomPreference(13);
             mMap.moveCamera(CameraUpdateFactory.newLatLng(temp));
